@@ -18,6 +18,8 @@ export default function Component() {
   const [origin, setOrigin] = useState<string>("JFK");
   const [destination, setDestination] = useState<string>("JFK");
   const [cabin, setCabin] = useState<string>("economy");
+  const [search, setSearch] = useState([]);
+  const [searchFound, setSearchFound] = useState<boolean>(false);
 
   const handleClick = async () => {
     console.log(origin, destination, cabin);
@@ -43,7 +45,11 @@ export default function Component() {
       offset: 0,
       date: Date.now(),
     });
-    console.log(response.data);
+    console.log(response.data.data);
+    setSearch(response.data.data);
+    if (response.data.length > 0) {
+      setSearchFound(true);
+    }
   };
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#0d1b0e] text-white p-6">
@@ -133,7 +139,11 @@ export default function Component() {
           Search
         </Button>
       </div>
-      <ResponseCard />
+      <div className="md:flex items-center gap-4 xs:flex-col">
+        {search.map((data) => (
+          <ResponseCard data={data} searchFound={searchFound} />
+        ))}
+      </div>
     </div>
   );
 }
