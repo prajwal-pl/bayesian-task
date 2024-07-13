@@ -147,7 +147,7 @@ export default function Component() {
         )} */}
 
         {search.map((data) => (
-          <ResponseCard data={data} searchFound={searchFound} />
+          <ResponseCard key={data} data={data} searchFound={searchFound} />
         ))}
       </div>
     </div>
