@@ -47,7 +47,7 @@ export default function Component() {
     });
     console.log(response.data.data);
     setSearch(response.data.data);
-    if (response.data.length > 0) {
+    if (response.data.data.length > 0) {
       setSearchFound(true);
     }
   };
@@ -140,6 +140,12 @@ export default function Component() {
         </Button>
       </div>
       <div className="md:flex items-center gap-4 xs:flex-col">
+        {/* {searchFound === false && (
+          <p className="text-center text-lg font-bold">
+            Try another search route!
+          </p>
+        )} */}
+
         {search.map((data) => (
           <ResponseCard data={data} searchFound={searchFound} />
         ))}
